@@ -7,12 +7,23 @@ import app.services.ProductASCComparator;
 import app.services.ProductDSCComparator;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class ProductView {
     ProductController productController = new ProductController();
+
+    private static int generateId(List<Product> productList) {
+        int id = 0;
+        if (productList.size() != 0) {
+            for (int i = 0; i < productList.size(); i++) {
+                if (productList.get(i).getId() > id) {
+                    id = productList.get(i).getId();
+                }
+            }
+        }
+        id++;
+        return id;
+    }
 
     public void showProductList() {
         List<Product> productList = productController.findAll();
@@ -23,16 +34,7 @@ public class ProductView {
 
     public void addNewProduct() {
         List<Product> productList = productController.findAll();
-        int id;
-        if (productList.size() == 0) id = 1;
-        else {
-            id = productList.get(0).getId();
-            for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getId() > id) {
-                    id = productList.get(i).getId();
-                }
-            }
-        }
+        int id = generateId(productList);
         System.out.print("Nhập tên sản phẩm: ");
         String productName = InputConfig.getString();
         System.out.print("Nhập giá sản phẩm: ");
