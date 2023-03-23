@@ -21,8 +21,7 @@ public class ProductView {
                 }
             }
         }
-        id++;
-        return id;
+        return ++id;
     }
 
     public void showProductList() {

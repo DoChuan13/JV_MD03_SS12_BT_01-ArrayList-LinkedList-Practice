@@ -27,11 +27,8 @@ public class ProductIPLM implements IService<Product> {
             productList.add(product);
             return product;
         }
-        for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getId() == product.getId()) {
-                productList.set(i, product);
-            }
-        }
+        int index = productList.indexOf(product);
+        productList.set(index, product);
         return product;
     }
 
